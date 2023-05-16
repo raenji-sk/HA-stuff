@@ -1,0 +1,485 @@
+type: custom:xiaomi-vacuum-map-card
+map_source:
+  camera: camera.roborock_s7_map
+calibration_source:
+  camera: true
+entity: vacuum.roborock_s7
+vacuum_platform: default
+tiles:
+  - tile_id: status
+    entity: vacuum.roborock_s7
+    label: Status
+    attribute: status
+    icon: mdi:robot-vacuum
+    translations:
+      starting: Starting
+      charger disconnected: Charger disconnected
+      idle: Idle
+      remote control active: Remote control active
+      cleaning: Cleaning
+      returning home: Returning home
+      manual mode: Manual mode
+      charging: Charging
+      charging problem: Charging problem
+      paused: Paused
+      spot cleaning: Spot cleaning
+      error: Error
+      shutting down: Shutting down
+      updating: Updating
+      docking: Docking
+      going to target: Going to target
+      zoned cleaning: Zoned cleaning
+      segment cleaning: Segment cleaning
+      emptying the bin: Emptying the bin
+      charging complete: Charging complete
+      device offline: Device offline
+  - tile_id: battery_level
+    entity: vacuum.roborock_s7
+    label: Battery
+    attribute: battery_level
+    icon: mdi:battery-charging-100
+    unit: '%'
+  - tile_id: fan_speed
+    entity: vacuum.roborock_s7
+    label: Fan speed
+    attribute: fan_speed
+    icon: mdi:fan
+    translations:
+      silent: Silent
+      standard: Standard
+      medium: Medium
+      turbo: Turbo
+      auto: Auto
+      gentle: Gentle
+  - tile_id: sensor_dirty_left
+    label: Sensors left
+    unit: h
+    multiplier: 0.0002777777777777778
+    hold_action:
+      action: call-service
+      service: vacuum.send_command
+      confirmation: true
+      service_data:
+        command: reset_consumable
+        params: sensor_dirty_time
+        entity_id: vacuum.roborock_s7
+    entity: sensor.roborock_s7_sensor_dirty_left
+    icon: mdi:eye-outline
+    precision: 0
+    translations: {}
+  - tile_id: filter_left
+    label: Filter left
+    unit: h
+    multiplier: 0.0002777777777777778
+    hold_action:
+      action: call-service
+      service: vacuum.send_command
+      confirmation: true
+      service_data:
+        command: reset_consumable
+        params: filter_work_time
+        entity_id: vacuum.roborock_s7
+    entity: sensor.roborock_s7_filter_left
+    icon: mdi:air-filter
+    precision: 0
+    translations: {}
+  - tile_id: main_brush_left
+    label: Main brush left
+    unit: h
+    multiplier: 0.0002777777777777778
+    hold_action:
+      action: call-service
+      service: vacuum.send_command
+      confirmation: true
+      service_data:
+        command: reset_consumable
+        params: main_brush_work_time
+        entity_id: vacuum.roborock_s7
+    entity: sensor.roborock_s7_main_brush_left
+    icon: mdi:brush
+    precision: 0
+    translations: {}
+  - tile_id: side_brush_left
+    label: Side brush left
+    unit: h
+    multiplier: 0.0002777777777777778
+    hold_action:
+      action: call-service
+      service: vacuum.send_command
+      confirmation: true
+      service_data:
+        command: reset_consumable
+        params: side_brush_work_time
+        entity_id: vacuum.roborock_s7
+    entity: sensor.roborock_s7_side_brush_left
+    icon: mdi:brush
+    precision: 0
+    translations: {}
+  - tile_id: cleaning_count
+    label: Cleaning count
+    entity: sensor.roborock_s7_total_clean_count
+    icon: mdi:counter
+    precision: 0
+    translations: {}
+icons:
+  - icon: mdi:play
+    conditions:
+      - entity: vacuum.roborock_s7
+        value_not: cleaning
+      - entity: vacuum.roborock_s7
+        value_not: error
+      - entity: vacuum.roborock_s7
+        value_not: returning
+    tooltip: Start
+    tap_action:
+      action: call-service
+      service: vacuum.start
+      service_data:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:pause
+    conditions:
+      - entity: vacuum.roborock_s7
+        value_not: docked
+      - entity: vacuum.roborock_s7
+        value_not: idle
+      - entity: vacuum.roborock_s7
+        value_not: error
+      - entity: vacuum.roborock_s7
+        value_not: paused
+    tooltip: Pause
+    tap_action:
+      action: call-service
+      service: vacuum.pause
+      service_data:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:stop
+    conditions:
+      - entity: vacuum.roborock_s7
+        value_not: docked
+      - entity: vacuum.roborock_s7
+        value_not: idle
+      - entity: vacuum.roborock_s7
+        value_not: error
+      - entity: vacuum.roborock_s7
+        value_not: paused
+    tooltip: Stop
+    tap_action:
+      action: call-service
+      service: vacuum.stop
+      service_data:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:home-map-marker
+    conditions:
+      - entity: vacuum.roborock_s7
+        value_not: docked
+      - entity: vacuum.roborock_s7
+        value_not: returning
+    tooltip: Return to base
+    tap_action:
+      action: call-service
+      service: vacuum.return_to_base
+      service_data:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:target-variant
+    conditions:
+      - entity: vacuum.roborock_s7
+        value_not: docked
+      - entity: vacuum.roborock_s7
+        value_not: error
+      - entity: vacuum.roborock_s7
+        value_not: cleaning
+      - entity: vacuum.roborock_s7
+        value_not: returning
+    tooltip: Clean spot
+    tap_action:
+      action: call-service
+      service: vacuum.clean_spot
+      service_data:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:map-marker
+    tooltip: Locate
+    tap_action:
+      action: call-service
+      service: vacuum.locate
+      service_data:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:fan-alert
+    conditions:
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value: 'off'
+    tooltip: Change fan speed
+    tap_action:
+      action: call-service
+      service: vacuum.set_fan_speed
+      service_data:
+        entity_id: vacuum.roborock_s7
+        fan_speed: quiet
+  - icon: mdi:fan-alert
+    conditions:
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value: quiet
+    tooltip: Change fan speed
+    tap_action:
+      action: call-service
+      service: vacuum.set_fan_speed
+      service_data:
+        entity_id: vacuum.roborock_s7
+        fan_speed: balanced
+  - icon: mdi:fan-alert
+    conditions:
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value: balanced
+    tooltip: Change fan speed
+    tap_action:
+      action: call-service
+      service: vacuum.set_fan_speed
+      service_data:
+        entity_id: vacuum.roborock_s7
+        fan_speed: turbo
+  - icon: mdi:fan-alert
+    conditions:
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value: turbo
+    tooltip: Change fan speed
+    tap_action:
+      action: call-service
+      service: vacuum.set_fan_speed
+      service_data:
+        entity_id: vacuum.roborock_s7
+        fan_speed: max
+  - icon: mdi:fan-alert
+    conditions:
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value: max
+    tooltip: Change fan speed
+    tap_action:
+      action: call-service
+      service: vacuum.set_fan_speed
+      service_data:
+        entity_id: vacuum.roborock_s7
+        fan_speed: custom
+  - icon: mdi:fan-alert
+    conditions:
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value: custom
+    tooltip: Change fan speed
+    tap_action:
+      action: call-service
+      service: vacuum.set_fan_speed
+      service_data:
+        entity_id: vacuum.roborock_s7
+        fan_speed: 'off'
+  - icon: mdi:fan-alert
+    conditions:
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value_not: 'off'
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value_not: quiet
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value_not: balanced
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value_not: turbo
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value_not: max
+      - entity: vacuum.roborock_s7
+        attribute: fan_speed
+        value_not: custom
+    tooltip: Change fan speed
+    tap_action:
+      action: call-service
+      service: vacuum.set_fan_speed
+      service_data:
+        entity_id: vacuum.roborock_s7
+        fan_speed: 'off'
+  - icon: mdi:numeric-0-box
+    tooltip: Downstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 0
+      target:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:numeric-1-box
+    tooltip: Upstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 1
+      target:
+        entity_id: vacuum.roborock_s7
+map_modes:
+  - name: Zone cleanup
+    icon: mdi:select-drag
+    run_immediately: false
+    coordinates_rounding: true
+    selection_type: MANUAL_RECTANGLE
+    max_selections: 5
+    repeats_type: EXTERNAL
+    max_repeats: 3
+    service_call_schema:
+      service: xiaomi_miio.vacuum_clean_zone
+      service_data:
+        zone: '[[selection]]'
+        repeats: '[[repeats]]'
+        entity_id: '[[entity_id]]'
+    predefined_selections: []
+    variables: {}
+  - name: Pin & Go
+    icon: mdi:map-marker-plus
+    run_immediately: false
+    coordinates_rounding: true
+    selection_type: MANUAL_POINT
+    max_selections: 999
+    repeats_type: NONE
+    max_repeats: 1
+    service_call_schema:
+      service: xiaomi_miio.vacuum_goto
+      service_data:
+        x_coord: '[[point_x]]'
+        y_coord: '[[point_y]]'
+        entity_id: '[[entity_id]]'
+    predefined_selections: []
+    variables: {}
+  - name: Rooms
+    icon: mdi:floor-plan
+    run_immediately: false
+    coordinates_rounding: true
+    selection_type: ROOM
+    max_selections: 999
+    repeats_type: REPEAT
+    max_repeats: 3
+    service_call_schema:
+      service: xiaomi_miio.vacuum_clean_segment
+      service_data:
+        segments: '[[selection]]'
+        entity_id: '[[entity_id]]'
+    predefined_selections:
+      - id: '16'
+        icon:
+          name: mdi:broom
+          x: 21350
+          'y': 24075
+        label:
+          text: Viktor
+          x: 21350
+          'y': 24075
+          offset_y: 35
+        outline:
+          - - 19650
+            - 22050
+          - - 23050
+            - 22050
+          - - 23050
+            - 26100
+          - - 19650
+            - 26100
+      - id: '17'
+        icon:
+          name: mdi:broom
+          x: 26600
+          'y': 23200
+        label:
+          text: Hnilý kút
+          x: 26600
+          'y': 23200
+          offset_y: 35
+        outline:
+          - - 25350
+            - 22200
+          - - 27850
+            - 22200
+          - - 27850
+            - 24200
+          - - 25350
+            - 24200
+      - id: '18'
+        icon:
+          name: mdi:broom
+          x: 24700
+          'y': 23575
+        label:
+          text: Záchod posch.
+          x: 24700
+          'y': 23575
+          offset_y: 35
+        outline:
+          - - 24250
+            - 22800
+          - - 25150
+            - 22800
+          - - 25150
+            - 24350
+          - - 24250
+            - 24350
+      - id: '19'
+        icon:
+          name: mdi:broom
+          x: 25200
+          'y': 25550
+        label:
+          text: Chodba posch.
+          x: 25200
+          'y': 25550
+          offset_y: 35
+        outline:
+          - - 22650
+            - 24150
+          - - 27750
+            - 24150
+          - - 27750
+            - 26950
+          - - 22650
+            - 26950
+      - id: '20'
+        icon:
+          name: mdi:broom
+          x: 21800
+          'y': 28350
+        label:
+          text: Spálňa
+          x: 21800
+          'y': 28350
+          offset_y: 35
+        outline:
+          - - 19550
+            - 26300
+          - - 24050
+            - 26300
+          - - 24050
+            - 30400
+          - - 19550
+            - 30400
+      - id: '21'
+        icon:
+          name: mdi:broom
+          x: 25575
+          'y': 28400
+        label:
+          text: Terezka
+          x: 25575
+          'y': 28400
+          offset_y: 35
+        outline:
+          - - 24300
+            - 26950
+          - - 26850
+            - 26950
+          - - 26850
+            - 29850
+          - - 24300
+            - 29850
+    variables: {}
+map_locked: true
