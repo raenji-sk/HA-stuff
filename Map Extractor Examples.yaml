@@ -1,0 +1,714 @@
+# CLEAN VERSION
+type: custom:xiaomi-vacuum-map-card
+map_source:
+  camera: camera.roborock_s7_map
+calibration_source:
+  camera: true
+entity: vacuum.roborock_s7
+vacuum_platform: default
+append_icons: true
+icons:
+  - icon: mdi:numeric-0-box
+    tooltip: Downstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 0
+      target:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:numeric-1-box
+    tooltip: Upstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 1
+      target:
+        entity_id: vacuum.roborock_s7
+map_modes:
+  - template: vacuum_clean_zone
+  - template: vacuum_goto
+  - template: vacuum_clean_segment
+    predefined_selections:
+      - id: '16'
+        icon:
+          name: mdi:broom
+          x: 21350
+          'y': 24075
+        label:
+          text: Viktor
+          x: 21350
+          'y': 24075
+          offset_y: 35
+        outline:
+          - - 19650
+            - 22050
+          - - 23050
+            - 22050
+          - - 23050
+            - 26100
+          - - 19650
+            - 26100
+      - id: '17'
+        icon:
+          name: mdi:broom
+          x: 26600
+          'y': 23200
+        label:
+          text: Hnilý kút
+          x: 26600
+          'y': 23200
+          offset_y: 35
+        outline:
+          - - 25350
+            - 22200
+          - - 27850
+            - 22200
+          - - 27850
+            - 24200
+          - - 25350
+            - 24200
+      - id: '18'
+        icon:
+          name: mdi:broom
+          x: 24700
+          'y': 23575
+        label:
+          text: Záchod posch.
+          x: 24700
+          'y': 23575
+          offset_y: 35
+        outline:
+          - - 24250
+            - 22800
+          - - 25150
+            - 22800
+          - - 25150
+            - 24350
+          - - 24250
+            - 24350
+      - id: '19'
+        icon:
+          name: mdi:broom
+          x: 25200
+          'y': 25550
+        label:
+          text: Chodba posch.
+          x: 25200
+          'y': 25550
+          offset_y: 35
+        outline:
+          - - 22650
+            - 24150
+          - - 27750
+            - 24150
+          - - 27750
+            - 26950
+          - - 22650
+            - 26950
+      - id: '20'
+        icon:
+          name: mdi:broom
+          x: 21800
+          'y': 28350
+        label:
+          text: Spálňa
+          x: 21800
+          'y': 28350
+          offset_y: 35
+        outline:
+          - - 19550
+            - 26300
+          - - 24050
+            - 26300
+          - - 24050
+            - 30400
+          - - 19550
+            - 30400
+      - id: '21'
+        icon:
+          name: mdi:broom
+          x: 25575
+          'y': 28400
+        label:
+          text: Terezka
+          x: 25575
+          'y': 28400
+          offset_y: 35
+        outline:
+          - - 24300
+            - 26950
+          - - 26850
+            - 26950
+          - - 26850
+            - 29850
+          - - 24300
+            - 29850
+    variables: {}
+map_locked: true
+
+# MULTI MAP MODE
+type: custom:xiaomi-vacuum-map-card
+map_source:
+  camera: camera.roborock_s7_map
+calibration_source:
+  camera: true
+entity: vacuum.roborock_s7
+vacuum_platform: default
+append_icons: true
+icons:
+  - icon: mdi:numeric-0-box
+    tooltip: Downstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 0
+      target:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:numeric-1-box
+    tooltip: Upstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 1
+      target:
+        entity_id: vacuum.roborock_s7
+map_modes:
+  - template: vacuum_clean_zone
+  - template: vacuum_goto
+  - template: vacuum_clean_segment
+    name: Rooms for map 0
+    predefined_selections:
+      - id: '16'
+        icon:
+          name: mdi:broom
+          x: 21350
+          'y': 24075
+        label:
+          text: Viktor
+          x: 21350
+          'y': 24075
+          offset_y: 35
+        outline:
+          - - 19650
+            - 22050
+          - - 23050
+            - 22050
+          - - 23050
+            - 26100
+          - - 19650
+            - 26100
+      - id: '17'
+        icon:
+          name: mdi:broom
+          x: 26600
+          'y': 23200
+        label:
+          text: Hnilý kút
+          x: 26600
+          'y': 23200
+          offset_y: 35
+        outline:
+          - - 25350
+            - 22200
+          - - 27850
+            - 22200
+          - - 27850
+            - 24200
+          - - 25350
+            - 24200
+      - id: '18'
+        icon:
+          name: mdi:broom
+          x: 24700
+          'y': 23575
+        label:
+          text: Záchod posch.
+          x: 24700
+          'y': 23575
+          offset_y: 35
+        outline:
+          - - 24250
+            - 22800
+          - - 25150
+            - 22800
+          - - 25150
+            - 24350
+          - - 24250
+            - 24350
+      - id: '19'
+        icon:
+          name: mdi:broom
+          x: 25200
+          'y': 25550
+        label:
+          text: Chodba posch.
+          x: 25200
+          'y': 25550
+          offset_y: 35
+        outline:
+          - - 22650
+            - 24150
+          - - 27750
+            - 24150
+          - - 27750
+            - 26950
+          - - 22650
+            - 26950
+      - id: '20'
+        icon:
+          name: mdi:broom
+          x: 21800
+          'y': 28350
+        label:
+          text: Spálňa
+          x: 21800
+          'y': 28350
+          offset_y: 35
+        outline:
+          - - 19550
+            - 26300
+          - - 24050
+            - 26300
+          - - 24050
+            - 30400
+          - - 19550
+            - 30400
+      - id: '21'
+        icon:
+          name: mdi:broom
+          x: 25575
+          'y': 28400
+        label:
+          text: Terezka
+          x: 25575
+          'y': 28400
+          offset_y: 35
+        outline:
+          - - 24300
+            - 26950
+          - - 26850
+            - 26950
+          - - 26850
+            - 29850
+          - - 24300
+            - 29850
+  - template: vacuum_clean_segment
+    name: Rooms for map 1
+    predefined_selections:
+      - id: '16'
+        icon:
+          name: mdi:broom
+          x: 21350
+          'y': 24075
+        label:
+          text: Viktor
+          x: 21350
+          'y': 24075
+          offset_y: 35
+        outline:
+          - - 19650
+            - 22050
+          - - 23050
+            - 22050
+          - - 23050
+            - 26100
+          - - 19650
+            - 26100
+      - id: '17'
+        icon:
+          name: mdi:broom
+          x: 26600
+          'y': 23200
+        label:
+          text: Hnilý kút
+          x: 26600
+          'y': 23200
+          offset_y: 35
+        outline:
+          - - 25350
+            - 22200
+          - - 27850
+            - 22200
+          - - 27850
+            - 24200
+          - - 25350
+            - 24200
+      - id: '18'
+        icon:
+          name: mdi:broom
+          x: 24700
+          'y': 23575
+        label:
+          text: Záchod posch.
+          x: 24700
+          'y': 23575
+          offset_y: 35
+        outline:
+          - - 24250
+            - 22800
+          - - 25150
+            - 22800
+          - - 25150
+            - 24350
+          - - 24250
+            - 24350
+      - id: '19'
+        icon:
+          name: mdi:broom
+          x: 25200
+          'y': 25550
+        label:
+          text: Chodba posch.
+          x: 25200
+          'y': 25550
+          offset_y: 35
+        outline:
+          - - 22650
+            - 24150
+          - - 27750
+            - 24150
+          - - 27750
+            - 26950
+          - - 22650
+            - 26950
+      - id: '20'
+        icon:
+          name: mdi:broom
+          x: 21800
+          'y': 28350
+        label:
+          text: Spálňa
+          x: 21800
+          'y': 28350
+          offset_y: 35
+        outline:
+          - - 19550
+            - 26300
+          - - 24050
+            - 26300
+          - - 24050
+            - 30400
+          - - 19550
+            - 30400
+      - id: '21'
+        icon:
+          name: mdi:broom
+          x: 25575
+          'y': 28400
+        label:
+          text: Terezka
+          x: 25575
+          'y': 28400
+          offset_y: 35
+        outline:
+          - - 24300
+            - 26950
+          - - 26850
+            - 26950
+          - - 26850
+            - 29850
+          - - 24300
+            - 29850
+map_locked: true
+
+# ADDITIONAL PRESETS MODE
+type: custom:xiaomi-vacuum-map-card
+map_source:
+  camera: camera.roborock_s7_map
+calibration_source:
+  camera: true
+entity: vacuum.roborock_s7
+preset_name: Floor 0
+vacuum_platform: default
+append_icons: true
+icons:
+  - icon: mdi:numeric-0-box
+    tooltip: Downstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 0
+      target:
+        entity_id: vacuum.roborock_s7
+  - icon: mdi:numeric-1-box
+    tooltip: Upstairs
+    tap_action:
+      action: call-service
+      service: roborock.vacuum_load_multi_map
+      service_data:
+        map_flag: 1
+      target:
+        entity_id: vacuum.roborock_s7
+map_modes:
+  - template: vacuum_clean_zone
+  - template: vacuum_goto
+  - template: vacuum_clean_segment
+    predefined_selections:
+      - id: '16'
+        icon:
+          name: mdi:broom
+          x: 21350
+          'y': 24075
+        label:
+          text: Viktor
+          x: 21350
+          'y': 24075
+          offset_y: 35
+        outline:
+          - - 19650
+            - 22050
+          - - 23050
+            - 22050
+          - - 23050
+            - 26100
+          - - 19650
+            - 26100
+      - id: '17'
+        icon:
+          name: mdi:broom
+          x: 26600
+          'y': 23200
+        label:
+          text: Hnilý kút
+          x: 26600
+          'y': 23200
+          offset_y: 35
+        outline:
+          - - 25350
+            - 22200
+          - - 27850
+            - 22200
+          - - 27850
+            - 24200
+          - - 25350
+            - 24200
+      - id: '18'
+        icon:
+          name: mdi:broom
+          x: 24700
+          'y': 23575
+        label:
+          text: Záchod posch.
+          x: 24700
+          'y': 23575
+          offset_y: 35
+        outline:
+          - - 24250
+            - 22800
+          - - 25150
+            - 22800
+          - - 25150
+            - 24350
+          - - 24250
+            - 24350
+      - id: '19'
+        icon:
+          name: mdi:broom
+          x: 25200
+          'y': 25550
+        label:
+          text: Chodba posch.
+          x: 25200
+          'y': 25550
+          offset_y: 35
+        outline:
+          - - 22650
+            - 24150
+          - - 27750
+            - 24150
+          - - 27750
+            - 26950
+          - - 22650
+            - 26950
+      - id: '20'
+        icon:
+          name: mdi:broom
+          x: 21800
+          'y': 28350
+        label:
+          text: Spálňa
+          x: 21800
+          'y': 28350
+          offset_y: 35
+        outline:
+          - - 19550
+            - 26300
+          - - 24050
+            - 26300
+          - - 24050
+            - 30400
+          - - 19550
+            - 30400
+      - id: '21'
+        icon:
+          name: mdi:broom
+          x: 25575
+          'y': 28400
+        label:
+          text: Terezka
+          x: 25575
+          'y': 28400
+          offset_y: 35
+        outline:
+          - - 24300
+            - 26950
+          - - 26850
+            - 26950
+          - - 26850
+            - 29850
+          - - 24300
+            - 29850
+map_locked: true
+additional_presets:
+  - preset_name: Floor 1
+    map_source:
+      camera: camera.roborock_s7_map
+    calibration_source:
+      camera: true
+    entity: vacuum.roborock_s7
+    vacuum_platform: default
+    append_icons: true
+    icons:
+      - icon: mdi:numeric-0-box
+        tooltip: Downstairs
+        tap_action:
+          action: call-service
+          service: roborock.vacuum_load_multi_map
+          service_data:
+            map_flag: 0
+          target:
+            entity_id: vacuum.roborock_s7
+      - icon: mdi:numeric-1-box
+        tooltip: Upstairs
+        tap_action:
+          action: call-service
+          service: roborock.vacuum_load_multi_map
+          service_data:
+            map_flag: 1
+          target:
+            entity_id: vacuum.roborock_s7
+    map_modes:
+      - template: vacuum_clean_zone
+      - template: vacuum_goto
+      - template: vacuum_clean_segment
+        predefined_selections:
+          - id: '16'
+            icon:
+              name: mdi:broom
+              x: 21350
+              'y': 24075
+            label:
+              text: Viktor
+              x: 21350
+              'y': 24075
+              offset_y: 35
+            outline:
+              - - 19650
+                - 22050
+              - - 23050
+                - 22050
+              - - 23050
+                - 26100
+              - - 19650
+                - 26100
+          - id: '17'
+            icon:
+              name: mdi:broom
+              x: 26600
+              'y': 23200
+            label:
+              text: Hnilý kút
+              x: 26600
+              'y': 23200
+              offset_y: 35
+            outline:
+              - - 25350
+                - 22200
+              - - 27850
+                - 22200
+              - - 27850
+                - 24200
+              - - 25350
+                - 24200
+          - id: '18'
+            icon:
+              name: mdi:broom
+              x: 24700
+              'y': 23575
+            label:
+              text: Záchod posch.
+              x: 24700
+              'y': 23575
+              offset_y: 35
+            outline:
+              - - 24250
+                - 22800
+              - - 25150
+                - 22800
+              - - 25150
+                - 24350
+              - - 24250
+                - 24350
+          - id: '19'
+            icon:
+              name: mdi:broom
+              x: 25200
+              'y': 25550
+            label:
+              text: Chodba posch.
+              x: 25200
+              'y': 25550
+              offset_y: 35
+            outline:
+              - - 22650
+                - 24150
+              - - 27750
+                - 24150
+              - - 27750
+                - 26950
+              - - 22650
+                - 26950
+          - id: '20'
+            icon:
+              name: mdi:broom
+              x: 21800
+              'y': 28350
+            label:
+              text: Spálňa
+              x: 21800
+              'y': 28350
+              offset_y: 35
+            outline:
+              - - 19550
+                - 26300
+              - - 24050
+                - 26300
+              - - 24050
+                - 30400
+              - - 19550
+                - 30400
+          - id: '21'
+            icon:
+              name: mdi:broom
+              x: 25575
+              'y': 28400
+            label:
+              text: Terezka
+              x: 25575
+              'y': 28400
+              offset_y: 35
+            outline:
+              - - 24300
+                - 26950
+              - - 26850
+                - 26950
+              - - 26850
+                - 29850
+              - - 24300
+                - 29850
+    map_locked: true
